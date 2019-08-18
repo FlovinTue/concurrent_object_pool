@@ -72,7 +72,7 @@ inline uint32_t concurrent_object_pool<Object>::avaliable() const
 template<class Object>
 inline void concurrent_object_pool<Object>::unsafe_destroy()
 {
-	block_node* blockNode(myLastBlock.load(std::memory_order_acquire));
+	block_node* blockNode(myLastBlock.load(std::memory_order_relaxed));
 	while (blockNode) {
 		block_node* const previous(blockNode->myPrevious);
 
@@ -88,7 +88,7 @@ inline void concurrent_object_pool<Object>::unsafe_destroy()
 template<class Object>
 inline void concurrent_object_pool<Object>::try_alloc_block()
 {
-	block_node* expected(myLastBlock);
+	block_node* expected(myLastBlock.load(std::memory_order_relaxed));
 
 	if (myUnusedObjects.size()) {
 		return;
