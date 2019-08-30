@@ -16,7 +16,7 @@ public:
 	inline Object* get_object();
 	inline void recycle_object(Object* object);
 
-	inline uint32_t avaliable() const;
+	inline std::size_t avaliable() const;
 
 	inline void unsafe_destroy();
 
@@ -65,7 +65,7 @@ inline void concurrent_object_pool<Object>::recycle_object(Object * object)
 	myUnusedObjects.push(object);
 }
 template<class Object>
-inline uint32_t concurrent_object_pool<Object>::avaliable() const
+inline std::size_t concurrent_object_pool<Object>::avaliable() const
 {
 	return static_cast<uint32_t>(myUnusedObjects.size());
 }
