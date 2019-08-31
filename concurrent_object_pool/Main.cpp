@@ -6,12 +6,12 @@
 #include "concurrent_object_pool.h"
 int main()
 {
-	concurrent_object_pool<int> heja(1);
-	auto hej = heja.get_object();
-	auto haj = heja.get_object();
-	heja.recycle_object(hej);
-	heja.unsafe_destroy();
-	auto hoj = heja.avaliable();
+	gdul::concurrent_object_pool<int> pool(1);
+	int* second = pool.get_object();
+	int* first = pool.get_object();
+	pool.recycle_object(first);
+	pool.unsafe_destroy();
+	std::size_t numAvaliable = pool.avaliable();
 
     std::cout << "Hello World!\n"; 
 }
