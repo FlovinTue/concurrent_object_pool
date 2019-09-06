@@ -32,7 +32,7 @@ template <class Object>
 class concurrent_object_pool
 {
 public:
-	concurrent_object_pool(const std::size_t blockSize);
+	concurrent_object_pool(std::size_t blockSize);
 	~concurrent_object_pool();
 
 	inline Object* get_object();
@@ -59,7 +59,7 @@ private:
 };
 
 template<class Object>
-inline concurrent_object_pool<Object>::concurrent_object_pool(const std::size_t blockSize)
+inline concurrent_object_pool<Object>::concurrent_object_pool(std::size_t blockSize)
 	: myBlockSize(blockSize)
 	, myUnusedObjects(blockSize)
 	, myLastBlock(nullptr)
